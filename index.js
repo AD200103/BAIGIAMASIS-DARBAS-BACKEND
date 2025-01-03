@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
+import questionRouter from "./src/route/question.js";
 import userRouter from "./src/route/user.js";
 const app = express();
 app.use(cors());
@@ -11,6 +12,8 @@ mongoose
   .connect(process.env.MONGO_CONNECTION)
   .then(() => console.log("Connected!"))
   .catch(() => console.log("Bad connection!"));
+
+app.use(questionRouter);
 app.use(userRouter);
 
 app.use((req, res) => {
