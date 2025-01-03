@@ -13,6 +13,12 @@ const REGISTER = async (req, res) => {
       name: req.body.name,
       id: uuidv4(),
     };
+    const findUserEmail = await UserModel.findOne({ email: newUser.email });
+    if (findUserEmail) {
+      return res
+        .status(403)
+        .json({ message: "User with such email already exists!" });
+    }
     const user = new UserModel(newUser);
     const response = user.save();
 
