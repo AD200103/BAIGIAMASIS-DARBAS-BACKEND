@@ -36,15 +36,15 @@ const GET_QUESTIONS = async (req, res) => {
 const DELETE_QUESTION = async (req, res) => {
   try {
     const findOuestion = await QuestionModel.findOne({ id: req.params.id });
+    if (!findOuestion) {
+      return res.status(404).json({ message: "No such question exists!" });
+    }
     if (req.body.userId !== findOuestion.userId) {
       return res.status(403).json({ message: "Access denied!" });
     }
     const questionToDel = await QuestionModel.findOneAndDelete({
       id: req.params.id,
     });
-    if (!questionToDel) {
-      return res.status(404).json({ message: "No such question exists!" });
-    }
     return res.status(200).json({ message: "Question deleted successfully!" });
   } catch (err) {
     console.log(err);
