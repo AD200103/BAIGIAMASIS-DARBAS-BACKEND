@@ -11,11 +11,10 @@ const POST_QUESTION = async (req, res) => {
     };
     console.log(newQuestion);
     const question = new QuestionModel(newQuestion);
-    const response = question.save();
-    const questionAdded = await response;
+    const response = await question.save();
     return res.status(201).json({
       message: "Question added successfully!",
-      question: questionAdded,
+      question: response,
     });
   } catch (err) {
     console.log(err);
@@ -42,6 +41,7 @@ const DELETE_QUESTION = async (req, res) => {
     if (req.body.userId !== findOuestion.userId) {
       return res.status(403).json({ message: "Access denied!" });
     }
+    // eslint-disable-next-line no-unused-vars
     const questionToDel = await QuestionModel.findOneAndDelete({
       id: req.params.id,
     });
