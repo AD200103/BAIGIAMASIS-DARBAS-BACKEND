@@ -33,6 +33,19 @@ const GET_QUESTIONS = async (req, res) => {
   }
 };
 
+const GET_QUESTION = async (req, res) => {
+  try {
+    const question = await QuestionModel.findOne({ id: req.params.id });
+    if (!question) {
+      return res.status(404).json({ message: "Such question doesnt exist!" });
+    }
+    return res.status(200).json({ question: question });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Something went wrong!" });
+  }
+};
+
 const DELETE_QUESTION = async (req, res) => {
   try {
     const findOuestion = await QuestionModel.findOne({ id: req.params.id });
@@ -71,4 +84,10 @@ const UPDATE_QUESTION = async (req, res) => {
     updatedQuestion: updatedQuestion,
   });
 };
-export { POST_QUESTION, GET_QUESTIONS, DELETE_QUESTION, UPDATE_QUESTION };
+export {
+  POST_QUESTION,
+  GET_QUESTIONS,
+  DELETE_QUESTION,
+  UPDATE_QUESTION,
+  GET_QUESTION,
+};
