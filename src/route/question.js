@@ -4,10 +4,13 @@ import {
   POST_QUESTION,
   GET_QUESTIONS,
   DELETE_QUESTION,
+  UPDATE_QUESTION,
 } from "../controller/question.js";
 import auth from "../utils/authorization.js";
 
 router.post("/question", auth, POST_QUESTION);
 router.get("/questions", GET_QUESTIONS);
 router.delete("/question/:id", auth, DELETE_QUESTION);
+router.put("/question/:id", auth, UPDATE_QUESTION);
+
 export default router;
