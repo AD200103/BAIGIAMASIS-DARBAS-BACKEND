@@ -6,8 +6,10 @@ const POST_QUESTION = async (req, res) => {
     const newQuestion = {
       id: uuidv4(),
       question_text: req.body.question_text,
+      title: req.body.title,
       date: new Date(),
       user_id: req.body.userId,
+      email: req.body.userEmail,
     };
     const question = new QuestionModel(newQuestion);
     const response = await question.save();
