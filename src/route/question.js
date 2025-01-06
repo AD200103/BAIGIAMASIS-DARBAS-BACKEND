@@ -13,6 +13,6 @@ router.post("/question", auth, POST_QUESTION);
 router.get("/questions", GET_QUESTIONS);
 router.get("/questions/:id", GET_QUESTION);
 router.delete("/question/:id", auth, DELETE_QUESTION);
-router.put("/question/:id", auth, UPDATE_QUESTION);
+router.put("/question/:id", UPDATE_QUESTION);
 
 export default router;

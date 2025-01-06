@@ -12,6 +12,7 @@ const POST_ANSWER = async (req, res) => {
       question_id: req.params.id,
       userId: req.body.userId,
       email: req.body.userEmail,
+      name: req.body.userName,
     };
     const answer = new AnswerModel(newAnswer);
     const response = await answer.save();

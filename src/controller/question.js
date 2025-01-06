@@ -10,6 +10,8 @@ const POST_QUESTION = async (req, res) => {
       date: new Date(),
       user_id: req.body.userId,
       email: req.body.userEmail,
+      name: req.body.userName,
+      answers: 0,
     };
     const question = new QuestionModel(newQuestion);
     const response = await question.save();
@@ -70,9 +72,6 @@ const UPDATE_QUESTION = async (req, res) => {
   const findQuestion = await QuestionModel.findOne({ id: req.params.id });
   if (!findQuestion) {
     return res.status(404).json({ message: "No such question exists!" });
-  }
-  if (findQuestion.user_id !== req.body.userId) {
-    return res.status(403).json({ message: "Access denied" });
   }
   const updatedQuestion = await QuestionModel.findOneAndUpdate(
     { id: req.params.id },

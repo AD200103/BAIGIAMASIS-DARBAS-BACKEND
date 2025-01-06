@@ -8,8 +8,10 @@ const auth = (req, res, next) => {
     if (err) {
       return res.status(403).json({ message: "Bad auth!" });
     }
+    req.body.userName = decoded.name;
     req.body.userId = decoded.id;
     req.body.userEmail = decoded.email;
+
     next();
   });
 };

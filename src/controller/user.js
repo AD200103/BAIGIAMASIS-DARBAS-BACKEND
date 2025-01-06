@@ -19,11 +19,17 @@ const REGISTER = async (req, res) => {
         .status(403)
         .json({ message: "User with such email already exists!" });
     }
+    const findUserName = await UserModel.findOne({ email: newUser.name });
+    if (findUserName) {
+      return res
+        .status(403)
+        .json({ message: "User with such name already exists!" });
+    }
     const user = new UserModel(newUser);
     const response = user.save();
 
     const token = jwt.sign(
-      { id: newUser.id, email: newUser.email },
+      { id: newUser.id, email: newUser.email, name: newUser.name },
       process.env.JWT_SECRET,
       { expiresIn: "12h" }
     );
@@ -52,7 +58,7 @@ const LOGIN = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      { id: user.id, email: user.email, name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: "12h" }
     );
