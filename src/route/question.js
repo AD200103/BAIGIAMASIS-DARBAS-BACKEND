@@ -7,7 +7,7 @@ import {
   UPDATE_QUESTION,
   GET_QUESTION,
 } from "../controller/question.js";
-import auth from "../utils/authorization.js";
+import { auth } from "../utils/authorization.js";
 
 router.post("/question", auth, POST_QUESTION);
 router.get("/questions", GET_QUESTIONS);
