@@ -8,11 +8,14 @@ const POST_ANSWER = async (req, res) => {
       answer_text: req.body.answer_text,
       date: new Date(),
       gained_likes_number: 0,
+      like_status: false,
       gained_dislikes_number: 0,
+      dislike_status: false,
       question_id: req.params.id,
       userId: req.body.userId,
       email: req.body.userEmail,
       name: req.body.userName,
+      usersWhoLikedTheAnswer: [],
     };
     const answer = new AnswerModel(newAnswer);
     const response = await answer.save();
