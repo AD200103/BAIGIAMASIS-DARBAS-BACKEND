@@ -6,9 +6,14 @@ import {
   DELETE_ANSWER,
   UPDATE_ANSWER,
 } from "../controller/answer.js";
-import { auth, checkingAuth } from "../utils/authorization.js";
+import {
+  auth,
+  checkingAuth,
+  simpleTokenCheck,
+} from "../utils/authorization.js";
 router.post("/question/:id/answers", auth, POST_ANSWER);
 router.get("/question/:id/answers", GET_ANSWERS);
 router.delete("/answer/:id", auth, DELETE_ANSWER);
 router.put("/answer/:id", checkingAuth, UPDATE_ANSWER);
+router.get("/token_check", simpleTokenCheck);
 export default router;

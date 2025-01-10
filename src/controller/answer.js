@@ -74,4 +74,5 @@ const UPDATE_ANSWER = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong!" });
   }
 };
+
 export { POST_ANSWER, GET_ANSWERS, DELETE_ANSWER, UPDATE_ANSWER };
