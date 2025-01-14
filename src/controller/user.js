@@ -31,7 +31,7 @@ const REGISTER = async (req, res) => {
     const token = jwt.sign(
       { id: newUser.id, email: newUser.email, name: newUser.name },
       process.env.JWT_SECRET,
-      { expiresIn: "12h" }
+      { expiresIn: "1m" }
     );
 
     const userAdded = await response;
@@ -60,7 +60,7 @@ const LOGIN = async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email, name: user.name },
       process.env.JWT_SECRET,
-      { expiresIn: "12h" }
+      { expiresIn: "1m" }
     );
 
     return res.status(200).json({ message: "Login successful!", token: token });

@@ -54,7 +54,7 @@ const DELETE_QUESTION = async (req, res) => {
     if (!findOuestion) {
       return res.status(404).json({ message: "No such question exists!" });
     }
-    if (req.body.userId !== findOuestion.userId) {
+    if (req.body.userId !== findOuestion.user_id) {
       return res.status(403).json({ message: "Access denied!" });
     }
     // eslint-disable-next-line no-unused-vars

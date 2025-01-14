@@ -16,6 +16,7 @@ const POST_ANSWER = async (req, res) => {
       email: req.body.userEmail,
       name: req.body.userName,
       usersWhoLikedTheAnswer: [],
+      usersWhoDislikedTheAnswer: [],
     };
     const answer = new AnswerModel(newAnswer);
     const response = await answer.save();
