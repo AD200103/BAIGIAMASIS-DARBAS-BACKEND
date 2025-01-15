@@ -8,8 +8,6 @@ const POST_ANSWER = async (req, res) => {
       id: uuidv4(),
       answer_text: req.body.answer_text,
       date: new Date(),
-      gained_likes_number: 0,
-      gained_dislikes_number: 0,
       question_id: req.params.id,
       userId: req.body.userId,
       email: req.body.userEmail,
