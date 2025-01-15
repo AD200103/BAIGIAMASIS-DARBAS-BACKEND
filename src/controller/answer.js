@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { v4 as uuidv4 } from "uuid";
 import AnswerModel from "../model/answer.js";
 
@@ -8,9 +9,7 @@ const POST_ANSWER = async (req, res) => {
       answer_text: req.body.answer_text,
       date: new Date(),
       gained_likes_number: 0,
-      like_status: false,
       gained_dislikes_number: 0,
-      dislike_status: false,
       question_id: req.params.id,
       userId: req.body.userId,
       email: req.body.userEmail,
@@ -46,7 +45,6 @@ const DELETE_ANSWER = async (req, res) => {
     if (req.body.userId !== findAnswer.userId) {
       return res.status(403).json({ message: "Access denied!" });
     }
-    // eslint-disable-next-line no-unused-vars
     const answerToDel = await AnswerModel.findOneAndDelete({
       id: req.params.id,
     });

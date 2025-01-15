@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { v4 as uuidv4 } from "uuid";
 import QuestionModel from "../model/question.js";
 
@@ -57,7 +58,6 @@ const DELETE_QUESTION = async (req, res) => {
     if (req.body.userId !== findOuestion.user_id) {
       return res.status(403).json({ message: "Access denied!" });
     }
-    // eslint-disable-next-line no-unused-vars
     const questionToDel = await QuestionModel.findOneAndDelete({
       id: req.params.id,
     });
