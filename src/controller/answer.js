@@ -6,7 +6,7 @@ const POST_ANSWER = async (req, res) => {
   try {
     const newAnswer = {
       id: uuidv4(),
-      answer_text: req.body.answer_text,
+      answer_text: req.body.answer_text.trim(),
       date: new Date(),
       question_id: req.params.id,
       userId: req.body.userId,

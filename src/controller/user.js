@@ -9,9 +9,9 @@ const REGISTER = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
     const newUser = {
-      email: req.body.email,
-      password: req.body.password && hash,
-      name: req.body.name,
+      email: req.body.email.trim(),
+      password: req.body.password.trim() && hash,
+      name: req.body.name.trim(),
       id: uuidv4(),
     };
     const findUserName = await UserModel.findOne({ name: newUser.name });
@@ -42,13 +42,16 @@ const REGISTER = async (req, res) => {
 
 const LOGIN = async (req, res) => {
   try {
-    const user = await UserModel.findOne({ email: req.body.email });
+    const user = await UserModel.findOne({ email: req.body.email.trim() });
     if (!user) {
       return res
         .status(403)
         .json({ message: "Email or password is inccorect!" });
     }
-    const checkPassword = bcrypt.compareSync(req.body.password, user.password);
+    const checkPassword = bcrypt.compareSync(
+      req.body.password.trim(),
+      user.password
+    );
     if (!checkPassword) {
       return res
         .status(403)

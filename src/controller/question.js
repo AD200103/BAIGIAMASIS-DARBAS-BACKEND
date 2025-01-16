@@ -6,8 +6,8 @@ const POST_QUESTION = async (req, res) => {
   try {
     const newQuestion = {
       id: uuidv4(),
-      question_text: req.body.question_text,
-      title: req.body.title,
+      question_text: req.body.question_text.trim(),
+      title: req.body.title.trim(),
       date: new Date(),
       user_id: req.body.userId,
       email: req.body.userEmail,
