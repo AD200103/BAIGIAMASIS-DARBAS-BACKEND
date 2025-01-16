@@ -10,16 +10,15 @@ const REGISTER = async (req, res) => {
     const hash = bcrypt.hashSync(req.body.password, salt);
     const newUser = {
       email: req.body.email,
-      password: hash,
+      password: req.body.password && hash,
       name: req.body.name,
       id: uuidv4(),
     };
+    const findUserName = await UserModel.findOne({ name: newUser.name });
     const findUserEmail = await UserModel.findOne({ email: newUser.email });
-    const findUserName = await UserModel.findOne({ email: newUser.name });
     if (findUserEmail || findUserName) {
       return validateNameEmail(findUserEmail, findUserName, res);
     }
-
     const user = new UserModel(newUser);
     const response = user.save();
 
@@ -45,11 +44,15 @@ const LOGIN = async (req, res) => {
   try {
     const user = await UserModel.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(403).json({ message: "Bad input data!" });
+      return res
+        .status(403)
+        .json({ message: "Email or password is inccorect!" });
     }
     const checkPassword = bcrypt.compareSync(req.body.password, user.password);
     if (!checkPassword) {
-      return res.status(403).json({ message: "Bad input data!" });
+      return res
+        .status(403)
+        .json({ message: "Email or password is inccorect!" });
     }
     const token = jwt.sign(
       { id: user.id, email: user.email, name: user.name },
