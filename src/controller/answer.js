@@ -43,7 +43,7 @@ const DELETE_ANSWER = async (req, res) => {
     if (req.body.userId !== findAnswer.userId) {
       return res.status(403).json({ message: "Access denied!" });
     }
-    const answerToDel = await AnswerModel.findOneAndDelete({
+    await AnswerModel.findOneAndDelete({
       id: req.params.id,
     });
     return res.status(200).json({ message: "Answer deleted successfully!" });
