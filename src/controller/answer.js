@@ -55,17 +55,24 @@ const DELETE_ANSWER = async (req, res) => {
 
 const UPDATE_ANSWER = async (req, res) => {
   try {
+    const findAnswerToUpdate = await AnswerModel.findOne({ id: req.params.id });
+    const body = {
+      usersWhoLikedTheAnswer: [
+        ...findAnswerToUpdate.usersWhoLikedTheAnswer,
+        req.body.userId,
+      ],
+    };
+
     const updateAnswer = await AnswerModel.findOneAndUpdate(
       { id: req.params.id },
-      { ...req.body },
+      { ...body },
       { new: true }
     );
+
     if (!updateAnswer) {
       return res.status(404).json({ message: "No such answer exists!" });
     }
-    return res
-      .status(200)
-      .json({ message: "Updated successfully!", answer: updateAnswer });
+    return res.status(200).json({ message: req.body.userId });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Something went wrong!" });
