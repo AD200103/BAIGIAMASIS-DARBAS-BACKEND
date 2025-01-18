@@ -14,6 +14,6 @@ import {
 router.post("/question/:id/answers", auth, POST_ANSWER);
 router.get("/question/:id/answers", GET_ANSWERS);
 router.delete("/answer/:id", auth, DELETE_ANSWER);
-router.put("/answer/:id", checkingAuth, UPDATE_ANSWER);
+router.put("/answer/:id", auth, UPDATE_ANSWER);
 router.get("/token_check", simpleTokenCheck);
 export default router;
