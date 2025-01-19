@@ -57,10 +57,12 @@ const UPDATE_ANSWER = async (req, res) => {
   try {
     const findAnswerToUpdate = await AnswerModel.findOne({ id: req.params.id });
     const body = {
-      usersWhoLikedTheAnswer: [
-        ...findAnswerToUpdate.usersWhoLikedTheAnswer,
-        req.body.userId,
-      ],
+      usersWhoLikedTheAnswer:
+        findAnswerToUpdate.usersWhoLikedTheAnswer.includes(req.body.userId)
+          ? findAnswerToUpdate.usersWhoLikedTheAnswer.filter(
+              (id) => id !== req.body.userId
+            )
+          : [...findAnswerToUpdate.usersWhoLikedTheAnswer, req.body.userId],
     };
 
     const updateAnswer = await AnswerModel.findOneAndUpdate(
