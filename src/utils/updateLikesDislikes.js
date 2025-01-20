@@ -1,5 +1,5 @@
 const updateLikeDislike = (req, findAnswerToUpdate) => {
-  if (req.body.dislikeStatus && !req.body.likeStatus) {
+  if ("dislikeStatus" in req.body) {
     const body = {
       usersWhoDislikedTheAnswer:
         findAnswerToUpdate.usersWhoDislikedTheAnswer.includes(req.body.userId)
@@ -9,7 +9,6 @@ const updateLikeDislike = (req, findAnswerToUpdate) => {
           : [...findAnswerToUpdate.usersWhoDislikedTheAnswer, req.body.userId],
       likeStatus: false,
       dislikeStatus: req.body.dislikeStatus,
-
       usersWhoLikedTheAnswer:
         findAnswerToUpdate.usersWhoLikedTheAnswer.includes(req.body.userId)
           ? findAnswerToUpdate.usersWhoLikedTheAnswer.filter(
@@ -20,7 +19,7 @@ const updateLikeDislike = (req, findAnswerToUpdate) => {
     return body;
   }
 
-  if (req.body.likeStatus && !req.body.dislikeStatus) {
+  if ("likeStatus" in req.body) {
     const body = {
       usersWhoLikedTheAnswer:
         findAnswerToUpdate.usersWhoLikedTheAnswer.includes(req.body.userId)
@@ -28,10 +27,8 @@ const updateLikeDislike = (req, findAnswerToUpdate) => {
               (id) => id !== req.body.userId
             )
           : [...findAnswerToUpdate.usersWhoLikedTheAnswer, req.body.userId],
-
       likeStatus: req.body.likeStatus,
       dislikeStatus: false,
-
       usersWhoDislikedTheAnswer:
         findAnswerToUpdate.usersWhoDislikedTheAnswer.includes(req.body.userId)
           ? findAnswerToUpdate.usersWhoDislikedTheAnswer.filter(
