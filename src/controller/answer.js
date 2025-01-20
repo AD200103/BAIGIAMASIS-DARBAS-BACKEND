@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import AnswerModel from "../model/answer.js";
-
+import updateLikeDislike from "../utils/updateLikesDislikes.js";
 const POST_ANSWER = async (req, res) => {
   try {
     const newAnswer = {
@@ -57,16 +57,7 @@ const DELETE_ANSWER = async (req, res) => {
 const UPDATE_ANSWER = async (req, res) => {
   try {
     const findAnswerToUpdate = await AnswerModel.findOne({ id: req.params.id });
-    const body = {
-      usersWhoLikedTheAnswer:
-        findAnswerToUpdate.usersWhoLikedTheAnswer.includes(req.body.userId)
-          ? findAnswerToUpdate.usersWhoLikedTheAnswer.filter(
-              (id) => id !== req.body.userId
-            )
-          : [...findAnswerToUpdate.usersWhoLikedTheAnswer, req.body.userId],
-      likeStatus: req.body.likeStatus,
-    };
-
+    const body = updateLikeDislike(req, findAnswerToUpdate);
     const updateAnswer = await AnswerModel.findOneAndUpdate(
       { id: req.params.id },
       { ...body },
