@@ -11,8 +11,7 @@ const POST_ANSWER = async (req, res) => {
       userId: req.body.userId,
       email: req.body.userEmail,
       name: req.body.userName,
-      likeStatus: false,
-      dislikeStatus: false,
+      pressed: "",
       usersWhoLikedTheAnswer: [],
       usersWhoDislikedTheAnswer: [],
     };
