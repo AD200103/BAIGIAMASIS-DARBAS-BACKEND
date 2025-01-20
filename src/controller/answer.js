@@ -64,6 +64,7 @@ const UPDATE_ANSWER = async (req, res) => {
               (id) => id !== req.body.userId
             )
           : [...findAnswerToUpdate.usersWhoLikedTheAnswer, req.body.userId],
+      likeStatus: req.body.likeStatus,
     };
 
     const updateAnswer = await AnswerModel.findOneAndUpdate(
