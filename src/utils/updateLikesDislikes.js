@@ -16,7 +16,6 @@ const updateLikeDislike = (req, findAnswerToUpdate) => {
     };
     return body;
   }
-
   if (req.body.pressed == "like pressed") {
     const body = {
       usersWhoLikedTheAnswer:
