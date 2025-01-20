@@ -7,6 +7,8 @@ const answerSchema = mongoose.Schema({
   userId: { type: String, required: true },
   email: { type: String, required: true },
   name: { type: String, required: true },
+  likeStatus: { type: Boolean, required: true },
+  dislikeStatus: { type: Boolean, required: true },
   usersWhoLikedTheAnswer: { type: [String], required: true },
   usersWhoDislikedTheAnswer: { type: [String], required: true },
 });

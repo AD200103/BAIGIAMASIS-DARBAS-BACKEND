@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { v4 as uuidv4 } from "uuid";
 import AnswerModel from "../model/answer.js";
 
@@ -12,6 +11,8 @@ const POST_ANSWER = async (req, res) => {
       userId: req.body.userId,
       email: req.body.userEmail,
       name: req.body.userName,
+      likeStatus: false,
+      dislikeStatus: false,
       usersWhoLikedTheAnswer: [],
       usersWhoDislikedTheAnswer: [],
     };
