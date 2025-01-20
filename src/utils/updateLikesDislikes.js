@@ -1,8 +1,5 @@
 const updateLikeDislike = (req, findAnswerToUpdate) => {
-  if (
-    (req.body.dislikeStatus && !req.body.likeStatus) ||
-    (!req.body.likeStatus && !req.body.dislikeStatus)
-  ) {
+  if (req.body.dislikeStatus && !req.body.likeStatus) {
     const body = {
       usersWhoDislikedTheAnswer:
         findAnswerToUpdate.usersWhoDislikedTheAnswer.includes(req.body.userId)
@@ -23,10 +20,7 @@ const updateLikeDislike = (req, findAnswerToUpdate) => {
     return body;
   }
 
-  if (
-    (req.body.likeStatus && !req.body.dislikeStatus) ||
-    (!req.body.likeStatus && !req.body.dislikeStatus)
-  ) {
+  if (req.body.likeStatus && !req.body.dislikeStatus) {
     const body = {
       usersWhoLikedTheAnswer:
         findAnswerToUpdate.usersWhoLikedTheAnswer.includes(req.body.userId)
