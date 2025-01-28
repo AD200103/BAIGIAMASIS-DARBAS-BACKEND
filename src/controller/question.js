@@ -31,7 +31,7 @@ const GET_QUESTIONS = async (req, res) => {
     const page = req.query.p || 0;
     const questionsPerPage = req.query.q || 5;
     const questions = await QuestionModel.find()
-      .sort((a, b) => b.date.toString().localeCompare(a.date.toString()))
+      .sort({ date: -1 })
       .skip(page * questionsPerPage)
       .limit(questionsPerPage);
     return res.status(200).json({ questions: questions });
