@@ -29,7 +29,7 @@ const POST_QUESTION = async (req, res) => {
 const GET_QUESTIONS = async (req, res) => {
   try {
     const page = req.query.p || 0;
-    const questionsPerPage = 3;
+    const questionsPerPage = req.query.q || 5;
     const questions = await QuestionModel.find()
       .skip(page * questionsPerPage)
       .limit(questionsPerPage);
