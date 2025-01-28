@@ -28,7 +28,11 @@ const POST_QUESTION = async (req, res) => {
 
 const GET_QUESTIONS = async (req, res) => {
   try {
-    const questions = await QuestionModel.find();
+    const page = req.query.p || 0;
+    const questionsPerPage = 3;
+    const questions = await QuestionModel.find()
+      .skip(page * questionsPerPage)
+      .limit(questionsPerPage);
     return res.status(200).json({ questions: questions });
   } catch (err) {
     console.log(err);
