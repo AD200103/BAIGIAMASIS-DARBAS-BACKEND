@@ -10,7 +10,7 @@ import {
 import { auth } from "../utils/authorization.js";
 
 router.post("/question", auth, POST_QUESTION);
-router.get("/", GET_QUESTIONS);
+router.get("/questions", GET_QUESTIONS);
 router.get("/questions/:id", GET_QUESTION);
 router.delete("/question/:id", auth, DELETE_QUESTION);
 router.put("/question/:id", UPDATE_QUESTION);
