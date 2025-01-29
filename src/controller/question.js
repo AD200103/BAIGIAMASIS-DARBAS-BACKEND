@@ -30,11 +30,14 @@ const GET_QUESTIONS = async (req, res) => {
   try {
     const page = req.query.p || 0;
     const questionsPerPage = req.query.q || 5;
+    const questionAmmount = await QuestionModel.countDocuments();
     const questions = await QuestionModel.find()
       .sort({ date: -1 })
       .skip(page * questionsPerPage)
       .limit(questionsPerPage);
-    return res.status(200).json({ questions: questions });
+    return res
+      .status(200)
+      .json({ questions: questions, questionAmmount: questionAmmount });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Something went wrong!" });
