@@ -31,7 +31,6 @@ const GET_QUESTIONS = async (req, res) => {
     const page = req.query.p || 0;
     const questionsPerPage = req.query.q || 5;
     const sortBy = req.query.sortVal || "All";
-    const questionAmmount = await QuestionModel.countDocuments();
 
     let query = {};
     if (sortBy == "Answered") {
