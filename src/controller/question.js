@@ -30,9 +30,16 @@ const GET_QUESTIONS = async (req, res) => {
   try {
     const page = req.query.p || 0;
     const questionsPerPage = req.query.q || 5;
+    const sortBy = req.query.sortVal || "All";
     const questionAmmount = await QuestionModel.countDocuments();
     const questions = await QuestionModel.find()
       .sort({ date: -1 })
+      .filter(
+        (a) =>
+          (sortBy == "All" && a.answers >= 0) ||
+          (sortBy == "Answered" && a.answers !== 0) ||
+          (sortBy == "Unanswered" && a.answers == 0)
+      )
       .skip(page * questionsPerPage)
       .limit(questionsPerPage);
     return res
