@@ -12,7 +12,7 @@ app.use(express.json());
 mongoose
   .connect(process.env.MONGO_CONNECTION)
   .then(() => console.log("Connected!"))
-  .catch((err) => console.log("Bad connection!",err.message));
+  .catch((err) => console.log("Bad connection!",err));
 
 app.use(questionRouter);
 app.use(answerRouter);
